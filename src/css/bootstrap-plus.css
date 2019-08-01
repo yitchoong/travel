@@ -1,0 +1,34 @@
+/* .carousel-item {
+    height: 350px;
+}
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+} */
+.carousel-indicators {
+    bottom: -2rem;
+} 
+
+.btn-purple {
+    background: rebeccapurple;
+    color: white;
+    border: 2px solid rebeccapurple;
+    border-radius: 3px;
+    padding: 5px 10px;
+    /* text-transform: uppercase; */
+}
+/* remove blue outline on buttons */
+.btn:focus, .btn:active {    
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+div[class$=Input] {
+    margin: 0px;
+    padding: 0px;
+}
+div[class$=Input] input {
+    min-height: 33px;
+}

@@ -615,6 +615,16 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
+
+.tiq_navbar {
+    background: -webkit-gradient(linear,right top,left top,from(#5ecda2),to(#094c81));
+    background: -webkit-linear-gradient(right,#5ecda2,#094c81);
+    background: -o-linear-gradient(right,#5ecda2,#094c81);
+    background: linear-gradient(-90deg,#5ecda2,#094c81);
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
