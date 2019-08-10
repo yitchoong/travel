@@ -29,7 +29,7 @@ const Header = ({ siteTitle }) => (
             }}
       >
 
-        <div style={{height:'80px', width:'80px', paddingTop:'20px', paddingLeft:'5px'}}>
+        <div style={{height:'80px', width:'100px', paddingTop:'10px', marginLeft:'0.8rem'}}>
           <Logo />
         </div>
       </Link>

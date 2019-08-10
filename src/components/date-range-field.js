@@ -12,10 +12,14 @@ const DateRangeField = ({field, form, label ,...props }) => {
 
     const FORMAT = 'dd/MM/yyyy';
 
+    const fromDate = Array.isArray(field.value) && field.value.length > 0 ? new Date(field.value[0]) : undefined
+    const toDate = Array.isArray(field.value) && field.value.length > 1 ? new Date(field.value[1]) : undefined
+
+    // console.log("DRP--> fromDate, toDate", fromDate, toDate)
     const elTo = useRef(null);
     const elFrom = useRef(null);
-    const [from, setFrom] = useState(undefined)
-    const [to, setTo] = useState(undefined)
+    const [from, setFrom] = useState(fromDate)
+    const [to, setTo] = useState(toDate)
     const [open,setOpen] = useState(false)
 
     useEffect(()=>{
@@ -145,7 +149,7 @@ const Style = styled.div`
     input {
       border-width: 0px;
       text-align: center;
-      min-height:38px;
+      min-height:37px;
     }
 
     .DayPickerInput input {
@@ -153,7 +157,7 @@ const Style = styled.div`
         border-width: 0px;
         text-align: center;
         width: 5.8rem;
-        min-height:38px;
+        min-height:37px;
     }
     .DayPickerInput input:focus {
       outline-width: 0;

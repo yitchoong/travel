@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Tiq Travel App`,
+    title: `Travel App`,
     description: `Travel Application for Tiq.com. Quotation, Proposal and Payment`,
     author: `@etiqa.com.sg`,
   },

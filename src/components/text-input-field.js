@@ -24,7 +24,7 @@ const TextInputField = ({field, form, label, feedback,...props }) => {
                 id={`TextInputField_${field.name}`}    
                 {...props}            
             />                
-            {invalid ? <ErrMsg>{form.errors[field.name]}</ErrMsg> : null }
+            {invalid ? <ErrMsg>{form.errors[field.name]}</ErrMsg> : '' }
             </Form.Group>
         </Style>
         </>

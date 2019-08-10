@@ -11,9 +11,10 @@ import styled from 'styled-components'
 const DateField = ({field, form, label ,...props }) => {
 
     const FORMAT = 'dd/MM/yyyy';
+    const travelDate = Array.isArray(field.value) && field.value.length > 0 ? new Date(field.value[0]) : undefined
 
     const elDate = useRef(null);
-    const [selected, setSelected] = useState(undefined)
+    const [selected, setSelected] = useState(travelDate)
     const [open, setOpen] = useState(false)
     useEffect(() => {
         form.setFieldValue(field.name, [selected])        
@@ -44,7 +45,6 @@ const DateField = ({field, form, label ,...props }) => {
     const today = new Date()
     const modifiers = { before: today };
     const invalid = form.touched[field.name] && !!form.errors[field.name]
-    console.log("open or close picker", open)
 
     return (
     <>        
