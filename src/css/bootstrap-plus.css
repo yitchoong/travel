@@ -20,14 +20,39 @@
     /* text-transform: uppercase; */
 }
 /* remove blue outline on buttons */
-button.btn-purple.selected {
-    box-shadow: 1px 1px 2px 1px rgba(197, 45, 214,0.5)
+/* .btn-purple.selected {
+    box-shadow: 1px 1px 2px 1px rgba(197, 45, 214,0.5);
+} */
+/* .btn-purple:focus, .btn-purple.focus {
+    box-shadow: 1px 1px 2px 1px rgba(197, 45, 214,0.5) !important;
+} */
+.btn-purple:hover {
+    color: #fff;
+    background-color:purple;
+    border-color: rebeccapurple;
 }
-.btn:focus, .btn:active {    
+/* .btn-purple:not(:disabled):not(.disabled):active, .btn-purple:not(:disabled):not(.disabled).active,
+.show > .btn-purple.dropdown-toggle {
+  color: #fff;
+  background-color: #0062cc;
+  border-color: #005cbf;
+}
+
+.btn-purple:not(:disabled):not(.disabled):active:focus, .btn-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-purple.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+} */
+
+
+
+
+    
+button.btn:focus, button.btn:active {    
     /* outline: none !important; */
     /* box-shadow: none !important; */
-    box-shadow: 1px 1px 2px 1px rgba(197, 45, 214,0.5)
+    box-shadow: 1px 1px 2px 1px transparent;
 }
+
 
 div[class$=Input] {
     margin: 0px;

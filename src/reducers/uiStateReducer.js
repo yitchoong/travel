@@ -1,9 +1,9 @@
 import {Constants} from '../actions/uiStateActionCreators'
 
-const initialState = {
-    page: '',
-    stage: 1,
-}
+// const initialState = {
+//     page: '',
+//     stage: 1,
+// }
 const uiStateReducer = (state = {}, action) => {
 
     switch (action.type) {

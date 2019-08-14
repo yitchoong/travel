@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,14 +9,14 @@ export default function StageDisplay({stage}) {
     return (
     <Styles stage={stage}>
         <Container fluid>
-            <Row className="stage-display">
-                <Col>
+            <Row className="stage-display justify-content-center">
+                <Col xs={{span:3}}>
                     <span className={stage === 1 ? "text-success": "text-secondary"}>1. Choose Plan</span>
                 </Col>
-                <Col>
+                <Col xs={{span:3}}>
                     <span className={stage === 2 ? "text-success": "text-secondary"}>2. Personal Details</span>
                 </Col>
-                <Col>
+                <Col xs={{span:3}}>
                     <span className={stage === 3 ? "text-success": "text-secondary"}>3. Payment</span>
                 </Col>
             </Row>
@@ -49,6 +49,9 @@ const Styles = styled.div`
   }
   span {
       font-size: 80%;
+  }
+  .text-success, text-secondary {
+      text-align : center;      
   }
   /* .active {
       color : cornflowerblue;

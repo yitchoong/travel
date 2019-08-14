@@ -7,7 +7,6 @@ const RadioGroupField = ({field, form, choices, label, feedback,...props }) => {
     const handleChange = (e) => {
         const index = parseInt( e.target.name.substring(e.target.name.length-1))
         const value = choices[index].value
-        // console.log("radio group, selected value=", value)
         form.setFieldValue(field.name, value)
     }
     return (
@@ -19,7 +18,7 @@ const RadioGroupField = ({field, form, choices, label, feedback,...props }) => {
                         return (
                             <Form.Check
                             key={`RadioGroupField${field.name+idx}`}
-                            custom={field.value ? true : false}          
+                            // custom={field.value ? true : false}          
                             type={"radio"}      
                             checked={field.value === choice.value ? true :false}                
                             name={`${field.name + idx}`}

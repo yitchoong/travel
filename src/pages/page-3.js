@@ -60,7 +60,7 @@ const QuotePage3 = () => {
       setActiveKey(key+'')
   }
 
-  console.log("**PAGE 3 -- INIT VALUES quote in state", planType, JSON.stringify(initialValues))
+//   console.log("**PAGE 3 -- INIT VALUES quote in state", planType, JSON.stringify(initialValues))
 
   return (
 <Styles>
@@ -70,12 +70,12 @@ const QuotePage3 = () => {
 
     <Container fluid>
 
-    <Row className="main-content" >
+    <Row>
 
       <Col xs={{span:11}} sm={{span:11}} className="box justify-content-center">
 
-            <Row style={{minWidth:'100vw', overflow:'auto'}}>
-                <Col xs={{span:8}} sm={{span:8}}>
+            <Row style={{minWidth:'95vw', overflow:'auto'}}>
+                <Col className="border border-light" xs={{span:8}} sm={{span:8}}>
                     <span>Total Premium</span>
                     <div className="text-success">27.90</div>
                     <div className="text-secondary">$10.45 x 2 adults</div>
@@ -86,7 +86,7 @@ const QuotePage3 = () => {
                         </span>
                     </div>
                 </Col>
-                <Col xs={{span:0}} sm={{span:4}} className="suitcase d-none d-sm-block">
+                <Col xs={{span:0}} sm={{span:4}} className="suitcase d-none d-sm-block border border-light">
                     <Suitcase />
                 </Col>
             </Row>
@@ -98,7 +98,7 @@ const QuotePage3 = () => {
                 // At this point, we move to page 2, before that we save the state from the form
                 let updatedState = Object.assign({}, quote.quote, values)
                 quote.updateQuote(updatedState)
-                navigate("/page-2/")
+                navigate("/page-4/")
                 }}
                 validate={ values => {
                     console.log("##### VALIDATE PAGE 3-- Inside validate, values = ", JSON.stringify(values))
@@ -115,19 +115,19 @@ const QuotePage3 = () => {
                   <Col>
           
                     <Form noValidate onSubmit={formik.handleSubmit} className="mb-0">
-                        <Row style={{minWidth:small ? '160vw':'100vw', overflow:'auto', backgroundColor:'#efefef'}}>
+                        <Row style={{minWidth:small ? '160vw':'100vw', overflow:'auto'}}>
                             <Col xs={{offset:5, span:2}}  className="border border-1 mt-0">
-                                <Field className="ml-2" name="planType" value="entry" component={RadioField} arial-label="transit" label=" " /> 
+                                <Field className="ml-2" name="planType" value="entry" custom component={RadioField} arial-label="transit" label=" " /> 
                                 <label><div>Entry</div><div>{formatNumber(totalPremium[0],2)}</div></label>
                             </Col>
 
                             <Col xs={{span:2}} className="border border-1 mt-0">
-                                <Field className="ml-2" name="planType" value="savvy" component={RadioField} arial-label="transit" label=" " /> 
+                                <Field className="ml-2" name="planType" value="savvy" custom component={RadioField} arial-label="transit" label=" " /> 
                                 <label> <div>Savvy</div><div>{formatNumber(totalPremium[1],2)}</div></label>
                             </Col>
 
                             <Col xs={{span:3}} className="border border-1 mt-0">
-                                <Field className="ml-2" name="planType" value="luxury" component={RadioField} arial-label="transit" label=" " /> 
+                                <Field className="ml-2" name="planType" value="luxury" custom component={RadioField} arial-label="transit" label=" " /> 
                                 <label> <div>Luxury</div><div>{formatNumber(totalPremium[2],2)}</div></label>
                             </Col>
                         </Row>
@@ -289,26 +289,21 @@ const QuotePage3 = () => {
                             </Col>
     </Row>
 
-    {/* <Link to="/page-2/">Go to page 2</Link> */}
-
-      {/* <Button onClick={buttonClick} >External Submit</Button> */}
-
   </Styles>
 )}
 
 export default QuotePage3
 
 const Styles = styled.div`
-  background-color: #efefef;
+  background-color: white;
   & > div.container-fluid {
-      height: calc(100vh - 80px - 40px - 40px - 30px);
+      height: calc(100vh - 90px - 40px - 40px - 50px); /* 90 for header, 40 for stage, 40 for footer, 30 for button */
       overflow: auto;
   }
   .box {
     align-self: center;
-    background-color: #fff;
     margin-left: 1rem;
-    box-shadow: 3px 0px 3px 3px rgba(200,207,219,0.5);
+    box-shadow: 3px 3px 3px 3px rgba(200,207,219,0.5);
     .text-success {
       font-size: 120%;
     }

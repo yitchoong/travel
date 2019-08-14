@@ -5,7 +5,14 @@ import { withMiddleware, logger, thunk} from "../middleware";
 
 export default function useUiState() {
   const [uiState, uiStateDispatch] = useReducer(uiStateReducer, {});
-  const wrappedUiStateDispatch = withMiddleware(uiState, uiStateDispatch)(logger,thunk )
+  // const wrappedUiStateDispatch = withMiddleware(uiState, uiStateDispatch)(logger,thunk )
+  let wrappedUiStateDispatch;
+  if (process.env.NODE_ENV === 'development') {
+    wrappedUiStateDispatch = withMiddleware(uiState, uiStateDispatch)(logger,thunk )
+  } else {
+    wrappedUiStateDispatch = withMiddleware(uiState, uiStateDispatch)(thunk)
+  }
+
   const { initUiState, updateUiState, setCurrentStage, setCurrentPage } = uiStateActions(wrappedUiStateDispatch);
 
   return {

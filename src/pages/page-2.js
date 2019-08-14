@@ -17,7 +17,6 @@ import StageDisplay from '../components/stage-display'
 import styled from 'styled-components'
 
 
-// const choices = [{text:"1", value:1},{text:"Annual trip", value:"annual"}]
 const adults = [1,2,3,4,5,6,7,8,9].map(i => ({text:i+'', value:i}))
 const children = [0,1,2,3,4,5,6].map(i => ({text:i+'', value:i}))
 const groupFamily = [{label:'Group', value:'group'}, {label:'Family',value: 'family'}]
@@ -74,14 +73,6 @@ const QuotePage2 = () => {
                 // if (values.travelDates.filter(v => v).length === 0) {
                 //     errors.travelDates = 'Please advise us of your travel date(s)'
                 // }
-                // if (values.countries.filter(v => v).length === 0) {
-                //   errors.countries = 'Please advise us of your destination countries'
-                // }
-                // if (values.couponCode && !['P20','P30'].find(c => c === values.couponCode) ) {
-                //   errors.couponCode = 'Invalid Coupon Code'
-                // }
-
-              // console.log("validate, errors, values", errors )
                 return errors
             }}      
             >
@@ -104,7 +95,7 @@ const QuotePage2 = () => {
                     <Field name="isTransitTraveller" custom component={CheckBoxField} arial-label="transit" label=" " />
                     <span>
                       <span>Are you a transit traveller</span>
-                       <a href="#"> {" "}
+                       <a href="#example"> {" "}
                         <span style={{fontSize:'90%'}}>Check if you qualify</span>
                       </a>
                     </span>
@@ -114,7 +105,7 @@ const QuotePage2 = () => {
                     <div style={{marginBottom:'0px'}}>
                       <span><b>Which option best describes your travel category</b></span>
                     </div>
-                    <Field  name="groupOrFamily" component={RadioGroupField} choices={groupFamily} arial-label="transit" />
+                    <Field  name="groupOrFamily" custom component={RadioGroupField} choices={groupFamily} arial-label="transit" />
                   </Col>
 
 
@@ -147,11 +138,6 @@ const QuotePage2 = () => {
 
       </Row>
     </Container>
-    {/* <Link to="/page-2/">Go to page 2</Link> */}
-
-      {/* <Button onClick={buttonClick} >External Submit</Button>
-
-    <Link to="/page-3/">Go to page 3</Link> */}
   </Styles>
 )}
 
@@ -166,7 +152,7 @@ const Styles = styled.div`
   }
   .box {
     padding-top: 1rem;
-    min-height: calc(100vh - 80px - 80px);
+    min-height: calc(100vh - 80px - 40px);
     box-shadow: 2px 2px 2px 2px rgba(200,207,219,0.2);
   }
   .box.instructions {
@@ -186,9 +172,5 @@ const Styles = styled.div`
       margin-left:0.3em;
     }
   }
-  /* div[class^=col] {
-    margin-bottom: 1em;
-  } */
-
-
+  
 `

@@ -1,5 +1,5 @@
 import React, {useEffect} from "react"
-import { Link, navigate } from "gatsby"
+import {  navigate } from "gatsby"
 
 // import Layout from "../components/layout"
 // import Image from "../components/image"
@@ -54,13 +54,13 @@ const IndexPage = () => {
 
   let initialValues = emptyObject ? initValues : quote.quote  
 
-  const buttonClick = () => {
-    console.log("buttonClick")    
-    if (boundSubmitForm) {
-      boundSubmitForm()
-    }
-  }
-  let boundSubmitForm = undefined
+  // const buttonClick = () => {
+  //   console.log("buttonClick")    
+  //   if (boundSubmitForm) {
+  //     boundSubmitForm()
+  //   }
+  // }
+  let boundSubmitForm = undefined // eslint-disable-line
   // console.log("**INIT VALUES quote in state", JSON.stringify(initialValues))
   return (
   <Styles>
@@ -110,7 +110,7 @@ const IndexPage = () => {
                     <Field name="countries" component={CountrySelectField} label="Where are you travelling to?" />
                   </Col>
                   <Col xs={12} md={3} className="pt-3">
-                    <Field name="isOneWay" component={CheckBoxField} custom label="One-way trip?" />
+                    <Field name="isOneWay" component={CheckBoxField}  custom label="One-way trip?" />
                   </Col>
                 </Row>
                 <div style={{margin:'0.5em'}} />
@@ -137,11 +137,6 @@ const IndexPage = () => {
       </Col>
     </Row>
     </Container>
-    {/* <Link to="/page-2/">Go to page 2</Link> */}
-
-      {/* <Button onClick={buttonClick} >External Submit</Button>
-
-    <Link to="/page-3/">Go to page 3</Link> */}
   </Styles>
 )}
 

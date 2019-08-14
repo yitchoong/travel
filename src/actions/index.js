@@ -1,10 +1,12 @@
 
 import * as quoteImports from './quoteActionCreators'
 import * as uiImports from './uiStateActionCreators'
+import * as proposalImports from './proposalActionCreators'
 
 
 const { Constants:QuoteConstants, ...quoteActionCreatorList} = quoteImports
 const { Constants:UiConstants, ...uiStateActionCreatorList} = uiImports
+const { Constants:ProposalConstants, ...proposalActionCreatorList} = proposalImports
 
 
 const bindActionCreators = (dispatch, actionsMap) => {
@@ -25,4 +27,9 @@ export const uiStateActions = (dispatch) => {
     const uiStateActionCreators = bindActionCreators(dispatch, uiStateActionCreatorList)
     return Object.assign({},  uiStateActionCreators)
 }
+export const proposalActions = (dispatch) => {
+    const proposalActionCreators = bindActionCreators(dispatch, proposalActionCreatorList)
+    return Object.assign({}, proposalActionCreators)
+}
+
 

@@ -4,14 +4,11 @@ import styled from 'styled-components'
 
 const RadioField = ({field, form, label, feedback,...props }) => {
     const handleChange = (e) => {
-        // console.log("====> handleChange check box target value", e.target.value, e.target.checked)
-        // const val = field.value && e.target.value === 'on' ? false : true
         form.setFieldValue(field.name, e.target.value)
     }
-    // const handleClick = (event) => {
-    //     console.log("handleClick", event, event.target.checked)
-    // }
-    // console.log("checkbox, name & value", field.name, field.value)
+    const handleClick = (event) => {
+        form.setFieldValue(field.name, props.value)
+    }
     return (
         <>        
             <Form.Group className="mt-3" style={{display:'inline-block'}}>
@@ -23,10 +20,10 @@ const RadioField = ({field, form, label, feedback,...props }) => {
                 label={label}                
                 type={"radio"}
                 onChange={handleChange}
-                // onClick={handleClick}
+                onClick={handleClick}
                 isInvalid={!!form.errors[field.name]}
                 feedback={feedback ? feedback : form.errors[field.name]}
-                id={`RadioField${field.name}`}    
+                id={`RadioField${field.name + props.value}`}    
                 {...props}            
                 />
             </Styles>
@@ -36,12 +33,8 @@ const RadioField = ({field, form, label, feedback,...props }) => {
 }
 export default RadioField
 const Styles = styled.div`
-    /* .custom-control-label:before{
-        background-color:red;
-    } */
-    .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
-        background-color:rebeccapurple;
-    }
-`
 
-  
+.custom-radio .custom-control-input:checked~.custom-control-label::before{
+    background-color:rebeccapurple;
+}
+`

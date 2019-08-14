@@ -6,24 +6,25 @@ import styled from 'styled-components'
 
 const CheckBoxField = ({field, form, label, feedback,...props }) => {
     const handleChange = (e) => {
-        // console.log("====> handleChange check box target value", e.target.value, e.target.checked)
+        console.log("====> handleChange check box target value", e.target.value, e.target.checked)
         // const val = field.value && e.target.value === 'on' ? false : true
         form.setFieldValue(field.name, e.target.checked)
     }
-    // const handleClick = (event) => {
-    //     console.log("handleClick", event)
+    // const handleClick = (e) => {
+    //     console.log("handleClick field.name = ",field.name, e.target.checked)
+    //     form.setFieldValue(field.name, !field.value)
     // }
-    // console.log("checkbox, name & value", field.name, field.value)
+    console.log("checkbox", field.name, field.value)
     return (
         <>        
             <Form.Group className="mt-3" style={{display:'inline-block'}}>
             <Styles>
                 <Form.Check
                 // custom={field.value ? true :false}                
-                checked={field.value ? true :false}                
+                checked={field.value ? true :false}                                
                 name={`${field.name}`}
                 label={label}                
-                type={props.radio ? "radio" :"checkbox"}
+                type={"checkbox"}
                 onChange={handleChange}
                 // onClick={handleClick}
                 isInvalid={!!form.errors[field.name]}
