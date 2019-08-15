@@ -13,9 +13,9 @@ const DateRangeField = ({field, form, label ,...props }) => {
     const FORMAT = 'dd/MM/yyyy';
 
     const fromDate = Array.isArray(field.value) && field.value.length > 0 ? new Date(field.value[0]) : undefined
-    const toDate = Array.isArray(field.value) && field.value.length > 1 ? new Date(field.value[1]) : undefined
+    const toDate = Array.isArray(field.value) && field.value.length > 1  ? new Date(field.value[1]) : undefined
 
-    // console.log("DRP--> fromDate, toDate", fromDate, toDate)
+    // console.log("DRP--> fromDate, toDate", fromDate, toDate, field.value)
     const elTo = useRef(null);
     const elFrom = useRef(null);
     const [from, setFrom] = useState(fromDate)

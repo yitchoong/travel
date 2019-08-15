@@ -36,29 +36,36 @@ const ProposalPage0 = () => {
 
     <Container fluid>
         <Row>
-            <Col xs={{span:10, offset:1}} className="justify-content-center">
+            <Col xs={{span:12, offset:0}} className="justify-content-center">
                 <div className="border rounded box">
                     <Row>
-                        <Col xs={{offset:1, span:10}}>
-                            <div className="text-center purplecolor mt-2">
+                        <Col xs={{span:12}} sm={{span:10, offset:1}}>
+                            <div className="text-center purplecolor mt-2" style={{overflow:'auto'}}>
                                 <h4>Would you like to login</h4>
-                                <span>By logging in to either options, your details will be pre-filled
-                                    for your convenience. You consent to disclose your personal data 
-                                    to Etiqa for application purposes.
-                                </span>                                
+                                
+                                <p>By logging in to either options, 
+                                    your details will be pre-filled
+                                    for your convenience. You consent to disclose your 
+                                    personal data to Etiqa for application purposes. </p>
+                                
                             </div>
+                        </Col>
+                        <Col>
                             <div className="mt-2">
                                 <Container fluid className="mb-5">
                                 <Row>
-                                    <Col xs={{span:5}}>
-                                        <Button onClick={handleTiqConnect} variant="purple" className="float-right pl-5 pr-5"><span>TiqConnect</span></Button>
+                                    <Col xs={{span:5}} className="">
+                                        <Button onClick={handleTiqConnect} variant="purple" className="float-right pr-2 pl-2 mr-0"><span>TiqConnect</span></Button>
                                     </Col>
                                     <Col xs={{span:2}}>
                                         <div className="text-center mt-2 border rounded border-light" style={{fontSize:'80%'}}>OR</div>
                                     </Col>
-                                    <Col xs={{span:5}} >
-                                    <div onClick={handleMyInfo} className="border border-info rounded pl-5 pr-5" style={{height:'40px', width:'200px', paddingTop:'0px', marginLeft:'0.8rem'}}>
-                                        <MyInfo className="mt-0" />
+                                    <Col xs={{span:5}} className="py-0" >
+                                    {/* <div onClick={handleMyInfo} className="border border-info rounded pl-4" style={{height:'40px', width:'150px', paddingTop:'0px', marginLeft:'0.8rem'}}> */}
+                                    <div onClick={handleMyInfo} className="float-left border border-info rounded pl-3" style={{height:'40px', width:'120px',  paddingTop:'0px', marginLeft:'0px'}}>
+                                        <div style={{width:80, height:40}} className="mt-1">
+                                        <MyInfo />
+                                        </div>
                                     </div>
 
                                     </Col>

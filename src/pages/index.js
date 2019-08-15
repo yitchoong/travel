@@ -82,7 +82,7 @@ const IndexPage = () => {
               navigate("/page-2/")
             }}
             validate={ values => {
-                // console.log("##### VALIDATE -- Inside validate, values = ", JSON.stringify(values))
+                console.log("##### VALIDATE -- Inside validate, values = ", JSON.stringify(values))
                 const errors = {}
                 if (values.travelDates.filter(v => v).length === 0) {
                     errors.travelDates = 'Please advise us of your travel date(s)'

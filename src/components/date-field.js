@@ -17,7 +17,9 @@ const DateField = ({field, form, label ,...props }) => {
     const [selected, setSelected] = useState(travelDate)
     const [open, setOpen] = useState(false)
     useEffect(() => {
-        form.setFieldValue(field.name, [selected])        
+        if (selected) {
+            form.setFieldValue(field.name, [selected])        
+        }
     } ,[selected])
     // useEffect(() => {
     //     function blurHandler(e){
@@ -45,7 +47,7 @@ const DateField = ({field, form, label ,...props }) => {
     const today = new Date()
     const modifiers = { before: today };
     const invalid = form.touched[field.name] && !!form.errors[field.name]
-
+    // console.log("date-field", field.name, field.value)
     return (
     <>        
       {/* <label style={{marginBottom:'0px'}}>{label}</label> */}
