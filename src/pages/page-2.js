@@ -15,21 +15,22 @@ import CheckBoxField from '../components/checkbox-field'
 import RadioGroupField from '../components/radio-group-field'
 import StageDisplay from '../components/stage-display'
 import styled from 'styled-components'
+import {sleep} from '../utils/general-utils'
 
 
 const adults = [1,2,3,4,5,6,7,8,9].map(i => ({text:i+'', value:i}))
 const children = [0,1,2,3,4,5,6].map(i => ({text:i+'', value:i}))
 const groupFamily = [{label:'Group', value:'group'}, {label:'Family',value: 'family'}]
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 const QuotePage2 = () => {
-  let boundForm = undefined
-  const quote = useAppState().quote
-  let initialValues = quote.quote  
+
+  let boundFormik = undefined
+  const {quote} = useAppState()
+  let initialValues = quote.quote
+
   const handleBack = () => {
-    if (boundForm) {
-      let updatedState = Object.assign({}, quote.quote, boundForm.values)
+    if (boundFormik) {
+      let updatedState = Object.assign({}, quote.quote, boundFormik.values)
       quote.updateQuote(updatedState)  
     }
     navigate("/")
@@ -61,8 +62,8 @@ const QuotePage2 = () => {
             onSubmit={(values, formik) => {
               // At this point, we move to page 2, before that we save the state from the form
               // mock the totalPremium figure for use in page three, simulate a async call
-              sleep(200).then((() => {
-                let updatedState = Object.assign({}, quote.quote, values, {totalPremium:[27.90, 45.00, 79.20]})
+              sleep(200).then(((data={premiums:[27.90, 45.20, 79.20]}) => {
+                let updatedState = Object.assign({}, quote.quote, values, {totalPremium:data.premiums})
                 quote.updateQuote(updatedState)
                 navigate("/page-3/")  
               }))
@@ -70,16 +71,17 @@ const QuotePage2 = () => {
             validate={ values => {
                 console.log("##### VALIDATE -- Inside validate, values = ", JSON.stringify(values))
                 const errors = {}
-                // if (values.travelDates.filter(v => v).length === 0) {
-                //     errors.travelDates = 'Please advise us of your travel date(s)'
-                // }
+                if (!values.groupOrFamily) {
+                  errors.groupOrFamily = "Please select group or family"
+                }
+
                 return errors
             }}      
             >
 
             {formik => { 
               // boundSubmitForm = formik.submitForm
-              boundForm = formik
+              boundFormik = formik
 
               return (
               <Form noValidate onSubmit={formik.handleSubmit}>
@@ -92,13 +94,15 @@ const QuotePage2 = () => {
                     <Field name="childrenCount" component={ChoiceField} choices={children} />
                   </Col>
                   <Col xs={12} >
-                    <Field name="isTransitTraveller" custom component={CheckBoxField} arial-label="transit" label=" " />
-                    <span>
-                      <span>Are you a transit traveller</span>
-                       <a href="#example"> {" "}
-                        <span style={{fontSize:'90%'}}>Check if you qualify</span>
-                      </a>
-                    </span>
+                    <Field name="isTransitTraveller" custom component={CheckBoxField} arial-label="transit"                     
+                        label={(<span>
+                          <span>Are you a transit traveller</span>
+                          <a href="#example"> {" "}
+                            <span style={{fontSize:'90%'}}>Check if you qualify</span>
+                          </a>
+                        </span>)} 
+                    />
+                    
                   </Col>
 
                   <Col xs={12} >

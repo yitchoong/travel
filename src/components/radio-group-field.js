@@ -8,7 +8,10 @@ const RadioGroupField = ({field, form, choices, label, feedback,...props }) => {
         const index = parseInt( e.target.name.substring(e.target.name.length-1))
         const value = choices[index].value
         form.setFieldValue(field.name, value)
+        form.setFieldTouched(field.name, true)
     }
+    const invalid = form.touched[field.name] && !!form.errors[field.name]
+    // console.log("radio group field, invalid=", invalid, field.name, field.value, form.errors, form.touched[field.name], form.errors[field.name]  )
     return (
         <>        
         <Styles>
@@ -24,7 +27,7 @@ const RadioGroupField = ({field, form, choices, label, feedback,...props }) => {
                             name={`${field.name + idx}`}
                             label={choice.label}                
                             onChange={handleChange}
-                            isInvalid={!!form.errors[field.name]}
+                            // isInvalid={!!form.errors[field.name]}
                             feedback={feedback ? feedback : form.errors[field.name]}
                             id={`RadioGroupField${field.name+idx}`}    
                             {...props}            
@@ -32,12 +35,19 @@ const RadioGroupField = ({field, form, choices, label, feedback,...props }) => {
                         )
                     })
                 }
+                {invalid ? <ErrMsg>{form.errors[field.name]}</ErrMsg> : '' }
             </Form.Group>
         </Styles>
         </>
     )
 }
 export default RadioGroupField
+
+const ErrMsg = styled.div`
+    font-size: 80%;
+    color: red;
+`
+
 const Styles = styled.div`
     /* .custom-control-label:before{
         background-color:red;

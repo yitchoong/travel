@@ -1,6 +1,6 @@
 import React from "react"
 import SEO from "../components/seo"
-import {navigate} from 'gatsby'
+import {navigate, useStaticQuery} from 'gatsby'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -8,17 +8,43 @@ import Button from 'react-bootstrap/Button'
 import StageDisplay from '../components/stage-display'
 import styled from 'styled-components'
 import MyInfo from '../components/myinfo'
+import {useAppState} from '../providers'
 
 
-const ProposalPage0 = () => {
+const ProposalPage4 = () => {
 
-  let boundForm = undefined
-  const handleBack = () => {
-    if (boundForm) {
+  const data = useStaticQuery(graphql`
+    query AddonsQuery {
+        allAddonsJson {
+            nodes {
+                value
+                label
+                amount
+            }
+        }
     }
+  `)
+  const addons = data.allAddonsJson.nodes
+    
+  const {quote, proposal, uiState} = useAppState()
+
+  const handleBack = () => {
     navigate("/page-3")
   }
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
+     
+    // assume, logs in, we save the customer data in uiState instead of proposal
+     
+    await uiState.fetchCustomer('demo','demo')
+
+    // we need to initialize the proposal data too
+    // const {adultCount, childrenCount, isTransitTraveller, isOneWay, groupOrFamily,couponCode, countries, tripType,
+    //     totalPremium,planType,productCode, quoteDate} = quote.quote
+    proposal.initProposal({addons, quote: quote.quote })
+    uiState.setTraveller(0) // initialize to traveller 0
+    // const updated = Object.assign({}, quote.quote, {adultCount})
+    // quote.updateQuote(updated)
+
     navigate("/page-5")
   }
   const handleTiqConnect = () => {
@@ -121,4 +147,6 @@ const Styles = styled.div`
     }
   }  
 `
-export default ProposalPage0
+export default ProposalPage4
+
+

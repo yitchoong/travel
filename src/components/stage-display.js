@@ -8,19 +8,19 @@ import useWindowSize from '../hooks/useWindowSize'
 export default function StageDisplay({stage}) {
     const window = useWindowSize()
     const small = window.width < 587
-    console.log("stage display", small, window.width)
+    // console.log("stage display", small, window.width)
     return (
     <Styles stage={stage} small={small}>
         <Container fluid>
             <Row className="stage-display justify-content-center">
                 <Col xs={{span:4}} sm={{span:3}}>
-                    <span className={stage === 1 ? "text-success": "text-secondary"}>1.Choose Plan</span>
+                    <span className={stage >= 1 ? "text-success": "text-secondary"}>1.Choose Plan</span>
                 </Col>
                 <Col xs={{span:4}} sm={{span:3}}>
-                    <span className={stage === 2 ? "text-success": "text-secondary"}>2.Personal Details</span>
+                    <span className={stage >= 2 ? "text-success": "text-secondary"}>2.Personal Details</span>
                 </Col>
                 <Col xs={{span:4}} sm={{span:3}}>
-                    <span className={stage === 3 ? "text-success": "text-secondary"}>3.Payment</span>
+                    <span className={stage >= 3 ? "text-success": "text-secondary"}>3.Payment</span>
                 </Col>
             </Row>
         </Container>

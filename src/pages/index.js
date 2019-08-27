@@ -1,16 +1,13 @@
 import React, {useEffect} from "react"
-import {  navigate } from "gatsby"
+import {  navigate, useStaticQuery } from "gatsby"
 
-// import Layout from "../components/layout"
-// import Image from "../components/image"
 import SEO from "../components/seo"
-// import Comments from "../components/comments";
 import Promotions from '../components/promotions'
 import Container from 'react-bootstrap/Container'
+
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import {useAppState} from '../providers'
 import Button from 'react-bootstrap/Button'
 import {Formik, Field} from 'formik'
 import ChoiceField from '../components/choice-input'
@@ -22,24 +19,21 @@ import TextInputField from '../components/text-input-field'
 // import {formatNumber} from '../utils/general-utils'
 import styled from 'styled-components'
 import useWindowSize from '../hooks/useWindowSize'
-
-const initValues = {
-  tripType:'', 
-  // countries:[{label:"Brunei", value:'Brunei'}],
-  countries:[],
-  isOneWay:false, 
-  travelDates:[], 
-  couponCode:'', 
-  adultCount:1, 
-  childrenCount:0, 
-  isTransitTraveller:false, 
-  groupOrFamily:'', 
-  totalPremium:[0,0,0], 
-  planType:'entry' ,
-}
+import {useAppState} from '../providers'
 
 const IndexPage = () => {
-  const messages = ["TEIF Sale! 45% + 5% off with 'JULTEIF'", "Second message"]
+
+  const data = useStaticQuery(graphql`
+  query PromoQuery {
+      allDealsJson {
+          nodes {
+              value
+              label
+          }
+      }
+  }
+  `)
+  const messages = data.allDealsJson.nodes.map( m => m.label)
   const quote = useAppState().quote
   const choices = [{text:"Single Trip", value:"single"},{text:"Annual trip", value:"annual"}]
   useEffect(() => {
@@ -48,26 +42,21 @@ const IndexPage = () => {
     }
   },[])
   const window = useWindowSize()
-  const small = window.width < 800 ? true : false
+  const small = window.width < 576 ? true : false
 
-  const emptyObject = Object.entries(quote.quote).length === 0 && quote.quote.constructor === Object
+  let initialValues = quote.quote.quoteDate ? quote.quote : quote.quoteInitialState
 
-  let initialValues = emptyObject ? initValues : quote.quote  
+  let boundFormik = undefined // eslint-disable-line
 
-  // const buttonClick = () => {
-  //   console.log("buttonClick")    
-  //   if (boundSubmitForm) {
-  //     boundSubmitForm()
-  //   }
-  // }
-  let boundSubmitForm = undefined // eslint-disable-line
-  // console.log("**INIT VALUES quote in state", JSON.stringify(initialValues))
+  console.log("INDEX.js initialValues", quote.quote.quoteDate, initialValues)
   return (
   <Styles>
     <SEO title="Tiq Travel" />
+
     <div style={{backgroundColor:'transparent',padding:'0.5rem 0.5rem 0.5rem', fontWeight:'bold'}}>
       Pack your cares away when you insure your travel
     </div>
+
     <Promotions messages={messages} bgColor="#e8b32e" />
     
     <Container fluid>
@@ -75,14 +64,12 @@ const IndexPage = () => {
       <Col xs={{span:12}} sm={{span:12}}>
           <Formik initialValues={initialValues} enableReinitialize={true}
             onSubmit={(values, formik) => {
-              // At this point, we move to page 2, before that we save the state from the form
-              let updatedState = Object.assign({}, quote.quote, values)
-              quote.updateQuote(updatedState)
-              console.log("navigate", navigate)
+              // At this point, we can move to page 2, before that we save the state from the form to global state
+              quote.updateQuote( Object.assign({}, quote.quote, values) )
               navigate("/page-2/")
             }}
             validate={ values => {
-                console.log("##### VALIDATE -- Inside validate, values = ", JSON.stringify(values))
+                console.log("##### VALIDATE INDEX.JS, values = ", JSON.stringify(values))
                 const errors = {}
                 if (values.travelDates.filter(v => v).length === 0) {
                     errors.travelDates = 'Please advise us of your travel date(s)'
@@ -94,12 +81,11 @@ const IndexPage = () => {
                   errors.couponCode = 'Invalid Coupon Code'
                 }
 
-              // console.log("validate, errors, values", errors )
                 return errors
             }}      
             >
             {formik => { 
-              boundSubmitForm = formik.submitForm
+              boundFormik = formik
               return (
               <Form noValidate onSubmit={formik.handleSubmit}>
                 <Row>

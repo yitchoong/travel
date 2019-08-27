@@ -1,7 +1,7 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import Logo from "./logo"
+import Logo from "./logo2"
 
 const Header = ({ siteTitle }) => (
   <header
@@ -29,7 +29,7 @@ const Header = ({ siteTitle }) => (
             }}
       >
 
-        <div style={{height:'80px', width:'100px', paddingTop:'10px', marginLeft:'0.8rem'}}>
+        <div style={{height:'62px', width:'95px', paddingTop:'10px', marginLeft:'0.8rem'}}>
           <Logo />
         </div>
       </Link>

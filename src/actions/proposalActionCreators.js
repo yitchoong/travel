@@ -5,7 +5,7 @@ export const Constants = {
     PROPOSAL_FETCH: "PROPOSAL_FETCH"
 };
 
-export const initProposal = () => ({ type: Constants.PROPOSAL_INIT})
+export const initProposal = (props) => ({ type: Constants.PROPOSAL_INIT, props})
 
 export const updateProposal = (proposal) => ({ type: Constants.PROPOSAL_UPDATE, proposal})
 

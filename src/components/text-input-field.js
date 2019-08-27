@@ -2,17 +2,21 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import styled from 'styled-components'
 
-const TextInputField = ({field, form, label, feedback,...props }) => {
+const TextInputField = ({field, form, label, feedback,onChange,...props }) => {
     const handleChange = (e) => {
         form.setFieldValue(field.name, e.target.value)
         form.setFieldTouched(field.name, true)
+        if (onChange) {
+            onChange(e.target.value)
+        }
     }
     const invalid = form.touched[field.name] && !!form.errors[field.name]
     return (
         <>        
         <Style>
             <Form.Group className="">
-                <Form.Label>{label}</Form.Label>
+                {label ?
+                <Form.Label>{label}</Form.Label> : null}
                 <Form.Control
                 type="text"
                 name={field.name}

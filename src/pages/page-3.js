@@ -26,25 +26,28 @@ const TEXT = {'0' : "Personal Accident",
 }
 
 const QuotePage3 = () => {
-  let boundForm = undefined
+    
+  let boundFormik = undefined
   const [activeKey, setActiveKey] = useState('0')
   const window = useWindowSize()
-  const small = window.width < 800;
-  const quote = useAppState().quote
+  const small = window.width < 576;
+
+  const {quote} = useAppState()
   const planType = quote.quote.planType || 'entry'
   const totalPremium = quote.quote.totalPremium || [0,0,0]
-  let initialValues = { planType: planType }
+  let initialValues = { planType }
+  
   const handleBack = () => {
-    if (boundForm) {
-      let updatedState = Object.assign({}, quote.quote, boundForm.values)
+    if (boundFormik) {
+      let updatedState = Object.assign({}, quote.quote, boundFormik.values)
       quote.updateQuote(updatedState)  
     }
     navigate("/page-2")
   }
   const handleNextPage = () => {
-    if (boundForm) {
-        if (boundForm) {
-            boundForm.submitForm()
+    if (boundFormik) {
+        if (boundFormik) {
+            boundFormik.submitForm()
         }      
     }
   }
@@ -101,14 +104,14 @@ const QuotePage3 = () => {
                 navigate("/page-4/")
                 }}
                 validate={ values => {
-                    console.log("##### VALIDATE PAGE 3-- Inside validate, values = ", JSON.stringify(values))
+                    // console.log("##### VALIDATE PAGE 3-- Inside validate, values = ", JSON.stringify(values))
                     const errors = {}
                     return errors
                 }}      
             >
 
                 {formik => { 
-                boundForm = formik
+                boundFormik = formik
                 return (
 
                 <Row>
@@ -281,12 +284,12 @@ const QuotePage3 = () => {
       </Row>
     </Container>
     <Row className="ml-1 mr-1" >
-                            <Col xs={{span:4}} sm={{span:4}} >
-                                <Button variant="outline-secondary" className="mt-2 pl-4 pr-4" type="button" onClick={handleBack}>Back</Button>
-                            </Col>
-                            <Col xs={{span:8}} sm={{span:8}} >
-                                <Button variant="info" className="mt-2 float-right pl-4 pr-4" type="button" onClick={handleNextPage} >Next</Button>
-                            </Col>
+        <Col xs={{span:4}} sm={{span:4}} >
+            <Button variant="outline-secondary" className="mt-2 pl-4 pr-4" type="button" onClick={handleBack}>Back</Button>
+        </Col>
+        <Col xs={{span:8}} sm={{span:8}} >
+            <Button variant="info" className="mt-2 float-right pl-4 pr-4" type="button" onClick={handleNextPage} >Next</Button>
+        </Col>
     </Row>
 
   </Styles>

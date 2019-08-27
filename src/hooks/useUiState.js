@@ -13,9 +13,11 @@ export default function useUiState() {
     wrappedUiStateDispatch = withMiddleware(uiState, uiStateDispatch)(thunk)
   }
 
-  const { initUiState, updateUiState, setCurrentStage, setCurrentPage } = uiStateActions(wrappedUiStateDispatch);
+  const { initUiState, updateUiState, setCurrentStage, setCurrentPage, setTraveller, setPrevSaved,
+    updateUiStateCustomer, setMessage, clearMessage, fetchCustomer, saveCustomer } = uiStateActions(wrappedUiStateDispatch);
 
   return {
-    uiState, initUiState, updateUiState, setCurrentStage, setCurrentPage
+    uiState, initUiState, updateUiState, setCurrentStage, setCurrentPage, setTraveller,
+    updateUiStateCustomer, setMessage, clearMessage, fetchCustomer, saveCustomer, setPrevSaved
   };
 }

@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { quoteReducer } from "../reducers";
 import { quoteActions }  from "../actions";
 import { withMiddleware, logger, thunk} from "../middleware";
+import { quoteInitialState } from '../reducers/quoteReducer'
 
 export default function useQuote() {
   const [quote, quoteDispatch] = useReducer(quoteReducer, {});
@@ -18,6 +19,7 @@ export default function useQuote() {
     initQuote,
     updateQuote,
     fetchQuote,
-    saveQuote
+    saveQuote,
+    quoteInitialState
   };
 }

@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/travel',
   siteMetadata: {
     title: `Travel App`,
     description: `Travel Application for Tiq.com. Quotation, Proposal and Payment`,

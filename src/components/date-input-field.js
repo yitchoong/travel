@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import {DateUtils} from 'react-day-picker';
@@ -11,36 +11,23 @@ import styled from 'styled-components'
 const DateField = ({field, form, label ,...props }) => {
 
     const FORMAT = 'dd/MM/yyyy';
-    const dateValue = Array.isArray(field.value) && field.value.length > 0 ? new Date(field.value[0]) : field.value ? new Date(field.value) : undefined
-    console.log("date value ", dateValue, field.value)
+    // const dateValue = Array.isArray(field.value) && field.value.length > 0 ? new Date(field.value[0]) : field.value ? new Date(field.value) : undefined
+    // console.log("date value ", dateValue, field.value)
     const elDate = useRef(null);
     const selected = field.value
     const [open, setOpen] = useState(false)
-    // useEffect(() => {
-    //     console.log("useEffect, setFieldValue", selected, field.value)
-    //     if (Array.isArray(field.value)) {
-    //         form.setFieldValue(field.name, [selected])        
-    //     } else {
-    //         form.setFieldValue(field.name, selected)        
-    //     }
-        
-    // } ,[field.value])
 
     const parseDate = (str, format, locale) => {
         const parsed = dateFnsParse(str, format, Date.now());
-        console.log("parseDate str", str, "parsed", parsed, format)
         if (DateUtils.isDate(parsed) && parsed.getFullYear() > 1000 ) {
-            console.log("parseDate parsed", parsed)
             return parsed;
         }
         return undefined;
     }      
     const formatDate = (date, format, locale) => {
-        console.log("format date", date)
         return dateFnsFormat(date, format, { locale })
     }
     const handleChange = (val) => {
-        console.log("==========handleChange val", val)
         form.setFieldValue(field.name, val)
     }
     
@@ -55,7 +42,7 @@ const DateField = ({field, form, label ,...props }) => {
     // const today = new Date()
     // const modifiers = { before: today };
     const invalid = form.touched[field.name] && !!form.errors[field.name]
-    console.log("disabled Days", props.disabledDays)
+    // console.log("disabled Days", props.disabledDays)
     return (
     <>        
       {/* <label style={{marginBottom:'0px'}}>{label}</label> */}

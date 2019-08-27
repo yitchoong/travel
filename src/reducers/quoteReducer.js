@@ -1,22 +1,28 @@
 import {Constants} from '../actions/quoteActionCreators'
-const initialState = {
+const quoteInitialState = {
   tripType:'single', 
   countries:[],
   isOneWay:false, 
   travelDates:[], 
   couponCode:'', 
-  adultCount:2, 
-  childrenCount:1, 
+  adultCount:1, 
+  childrenCount:0, 
   isTransitTraveller:false, 
   groupOrFamily:'', 
   totalPremium:[0,0,0], 
   planType:'entry' ,
+  recommendedPlan: 'entry',
+  productCode: '',
+  quoteDate: undefined
+}
+const initState = () => {
+  return Object.assign({}, quoteInitialState, {quoteDate: new Date()})
 }
 
-const quoteReducer = (state = initialState, action) => {
+const quoteReducer = (state = quoteInitialState, action) => {
     switch (action.type) {
       case Constants.QUOTE_INIT:
-        return initialState
+        return initState()
       case Constants.QUOTE_UPDATE:
         return Object.assign({}, action.quote)
       case Constants.QUOTE_FETCH:
@@ -28,4 +34,4 @@ const quoteReducer = (state = initialState, action) => {
   };
   
   export default quoteReducer
-  
+  export { quoteInitialState }
